@@ -59,57 +59,33 @@ h1 {
 
 .add-todo {
   display: flex;
-  align-items: center;
-  gap: 1rem; /* Add spacing between elements */
+  gap: 1rem;
   margin-bottom: 2.5rem;
 }
 
-.add-todo input[type="text"] {
-  flex: 1; /* Allow the text input to take up available space */
+input[type="text"],
+input[type="datetime-local"] {
   padding: 0.8rem 1.2rem;
   border: 2px solid var(--border-color);
   border-radius: 12px;
   font-size: 1rem;
+  transition: all 0.3s ease;
   background: white;
 }
 
-.add-todo input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="datetime-local"]:focus {
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
-.datetime-wrapper {
-  position: relative;
-  flex-shrink: 0;
+input[type="text"] {
+  flex: 1;
 }
 
-.datetime-wrapper input[type="datetime-local"] {
-  padding: 0.8rem 2.5rem 0.8rem 2.5rem; /* Add padding to accommodate the calendar icon */
-  font-size: 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
-  background: white;
-  width: 250px; /* Set a fixed width to avoid collapsing */
-}
-
-.datetime-wrapper input[type="datetime-local"]:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-}
-
-.datetime-wrapper::before {
-  content: "\f073"; /* Font Awesome calendar icon */
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  color: var(--primary-color);
-  font-size: 1.2rem;
-  pointer-events: none; /* Allow clicking inside the input */
+input[type="datetime-local"] {
+  width: 200px;
 }
 
 button {
@@ -132,20 +108,138 @@ button:hover {
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
-/* Responsive Design */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.filter-btn {
+  background-color: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--border-color);
+  font-size: 0.9rem;
+}
+
+.filter-btn:hover {
+  background-color: var(--background-start);
+  color: var(--primary-color);
+  box-shadow: none;
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+#todoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  background-color: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.todo-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.todo-item.completed {
+  opacity: 0.7;
+  background-color: var(--background-start);
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+.todo-checkbox {
+  margin-right: 1rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+.todo-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.todo-text {
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.timer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+.timer.warning {
+  background-color: var(--warning-color);
+}
+
+.timer.danger {
+  background-color: var(--danger-color);
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: var(--danger-color);
+  padding: 0.5rem;
+  margin-left: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-color);
+  color: white;
+}
+
 @media (max-width: 768px) {
   .add-todo {
-    flex-direction: column;
-    gap: 1rem;
+      flex-direction: column;
   }
 
-  .add-todo input[type="text"],
-  .datetime-wrapper input[type="datetime-local"],
-  button {
-    width: 100%; /* Stack elements vertically and stretch */
+  input[type="datetime-local"] {
+      width: 100%;
   }
 
-  .datetime-wrapper input[type="datetime-local"] {
-    padding-left: 2.5rem; /* Maintain padding for the calendar icon */
+  .todo-content {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .timer {
+      width: 100%;
+      text-align: left;
   }
 }
