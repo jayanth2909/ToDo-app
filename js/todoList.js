@@ -86,10 +86,12 @@ export class TodoList {
     }
 
     updateTimerStyle(timerElement, timeLeft) {
-        timerElement.classList.remove('warning', 'danger');
-        if (timeLeft <= 3600) { // 1 hour
+        timerElement.classList.remove('warning', 'danger', 'blinking');
+        if (timeLeft < 60) { // Less than 1 minute
+            timerElement.classList.add('danger', 'blinking');
+        } else if (timeLeft <= 3600) { // Less than 1 hour
             timerElement.classList.add('danger');
-        } else if (timeLeft <= 7200) { // 2 hours
+        } else if (timeLeft <= 7200) { // Less than 2 hours
             timerElement.classList.add('warning');
         }
     }
